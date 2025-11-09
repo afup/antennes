@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Attribute\Route;
     host: '{code}.afup.org',
 )]
 #[Route(
-    path: '/{code}',
+    path: '/{code?}',
     env: 'dev',
 )]
 final class IndexAction extends AbstractController
@@ -31,8 +31,16 @@ final class IndexAction extends AbstractController
         private readonly LoggerInterface $logger,
     ) {}
 
-    public function __invoke(string $code): Response
+    public function __invoke(?string $code): Response
     {
+        if ($code === null) {
+            if ($this->env === 'dev') {
+                return $this->render('dev.html.twig');
+            }
+
+            return $this->redirect('https://afup.org');
+        }
+
         $antenne = $this->antennesRepository->get($code);
         if ($antenne === null) {
             return $this->error("Code `$code` is invalid");
