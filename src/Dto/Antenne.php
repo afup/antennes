@@ -10,6 +10,5 @@ final readonly class Antenne
         public string $code,
         public string $label,
         public Links $links,
-    ) {
-    }
+    ) {}
 }

@@ -17,8 +17,7 @@ final readonly class ApiAntennesRepository implements AntennesRepository
         #[Autowire(service: 'afup.client')]
         private HttpClientInterface $httpClient,
         private MapperBuilder $mapperBuilder,
-    ) {
-    }
+    ) {}
 
     public function get(string $code): ?Antenne
     {
