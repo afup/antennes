@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<main class="container mx-auto max-w-xl sm:max-w-none text-white">
+    <div class="mx-auto sm:max-w-xl">
+        <h1 class="text-8xl font-bold text-primary-500 mt-10">Oups !</h1>
+
+        <div class="flex flex-col gap-5 mt-10">
+            <p class="text-xl">
+                Un souci est survenu.
+            </p>
+
+            <p class="text-xl">
+                Si le problème persiste, vous pouvez nous le signaler sur le Slack des membres.<br/>
+            </p>
+
+            <p class="text-xl">
+                Si vous rencontrez un bug sur le site, n'hésitez pas à venir contribuer sur <a href="https://github.com/afup/antennes" class="text-primary-500 underline">GitHub</a>.
+            </p>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
