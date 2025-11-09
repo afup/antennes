@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html class="min-h-full" lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+        <title>{% block title %}AFUP - Antennes{% endblock %}</title>
+{# TODO favicon #}
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+
+        {% block head %}{% endblock %}
+
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+        {% endblock %}
+
+        {% block javascripts %}
+            {% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+    </head>
+    <body>
+    <div style="background-image: url({{ asset('img/bg.png') }})">
+
+        <div class="min-h-screen flex flex-col backdrop-blur-sm">
+
+            {% block body %}{% endblock %}
+
+        </div>
+
+    </div>
+    </body>
+</html>

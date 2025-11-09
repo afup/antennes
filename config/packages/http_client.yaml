@@ -1,0 +1,10 @@
+# config/packages/framework.yaml
+framework:
+    http_client:
+        scoped_clients:
+            afup.client:
+                base_uri: '%afup.api.host%'
+                verify_host: false
+                verify_peer: false
+                headers:
+                    Accept: 'application/json'

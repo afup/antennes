@@ -1,0 +1,40 @@
+---
+services:
+  php:
+    image: ${IMAGES_PREFIX:-}app-php
+    restart: unless-stopped
+    environment:
+      SERVER_NAME: ${SERVER_NAME:-localhost}, php:80
+      DEFAULT_URI: https://${SERVER_NAME:-localhost}:${HTTPS_PORT:-443}
+      MERCURE_PUBLISHER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
+      MERCURE_SUBSCRIBER_JWT_KEY: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    ports:
+      - name: http
+        target: 80
+        published: ${HTTP_PORT:-8080}
+        protocol: tcp
+      - name: https
+        target: 443
+        published: ${HTTPS_PORT:-8443}
+        protocol: tcp
+      - name: http3
+        target: 443
+        published: ${HTTP3_PORT:-8443}
+        protocol: udp
+#      - name: afup
+#        target: 9205
+#        published: 9205
+#        protocol: tcp
+
+# Mercure is installed as a Caddy module, prevent the Flex recipe from installing another service
+###> symfony/mercure-bundle ###
+###< symfony/mercure-bundle ###
+
+volumes:
+  caddy_data:
+  caddy_config:
+###> symfony/mercure-bundle ###
+###< symfony/mercure-bundle ###
