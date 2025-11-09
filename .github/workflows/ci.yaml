@@ -21,7 +21,7 @@ jobs:
       - name: Checking Composer
         run: composer validate --strict
 
-      - uses: "ramsey/composer-install@v2"
+      - uses: ramsey/composer-install@v2
 
       - name: Running PHPStan
         run: php vendor/bin/phpstan
@@ -29,3 +29,25 @@ jobs:
       - name: Running PHP Coding Standards Fixer
         run: php vendor/bin/php-cs-fixer fix --dry-run
 
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.php-version }}
+
+      - uses: ramsey/composer-install@v2
+
+      - name: Running Tailwind CSS build
+        run: php bin/console tailwind:build --minify
+
+      - name: Compiling assets
+        run: php bin/console asset-map:compile
+
+      - name: Running tests
+        run: php vendor/bin/phpunit

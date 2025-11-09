@@ -13,13 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(
-    path: '/{code?}',
-    env: 'dev',
-)]
-#[Route(
     path: '/',
     host: '{code}.afup.org',
-    env: 'prod',
+)]
+#[Route(
+    path: '/{code}',
+    env: 'dev',
 )]
 final class IndexAction extends AbstractController
 {
@@ -30,15 +29,10 @@ final class IndexAction extends AbstractController
         private readonly string $env,
         private readonly AntennesRepository $antennesRepository,
         private readonly LoggerInterface $logger,
-    ) {
-    }
+    ) {}
 
-    public function __invoke(?string $code): Response
+    public function __invoke(string $code): Response
     {
-        if ($code === null) {
-            return $this->error('Code is missing');
-        }
-
         $antenne = $this->antennesRepository->get($code);
         if ($antenne === null) {
             return $this->error("Code `$code` is invalid");

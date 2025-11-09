@@ -24,7 +24,7 @@
         <div class="text-white text-center pb-5 sm:pb-10 text-xl sm:text-2xl">
             <a href="https://afup.org" class="hover:underline">afup.org</a>
             <span class="px-3">
-                <twig:ux:icon name="sidekickicons:dots-3x3-20-solid" class="h-5 inline-block" />
+                <twig:ux:icon name="separator" class="h-5 inline-block" />
             </span>
             <a href="https://afup.org/association/devenir-membre" class="hover:underline">Devenir membre</a>
         </div>
@@ -42,7 +42,7 @@
 
             <hr class="border-t-white mx-32"/>
 
-            <twig:Link url="https://event.afup.org" icon="event">{{ currentEvent }}</twig:Link>
+            <twig:Link url="https://event.afup.org" icon="event" data-qa="current-event">{{ currentEvent }}</twig:Link>
         </div>
     </main>
 

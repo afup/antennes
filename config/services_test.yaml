@@ -1,0 +1,3 @@
+services:
+    App\Tests\MockClientCallback: ~
+    App\Repository\AntennesRepository: '@App\Repository\ApiAntennesRepository'
