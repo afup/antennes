@@ -2,6 +2,10 @@
 
 {% block title %}AFUP {{ antenne.label }}{% endblock %}
 
+{% block favicon %}
+    <link rel="icon" href="{{ antenne.logo.simple }}" sizes="any" type="image/svg+xml">
+{% endblock %}
+
 {% block head %}
 
 <meta property="og:type" content="website">
