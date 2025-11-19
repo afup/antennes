@@ -26,6 +26,7 @@ final class AntenneTest extends WebTestCase
         $this->callWithAntenne('lyon');
 
         self::assertResponseIsSuccessful();
+        self::assertSelectorExists('link[href="https://afup.example/logo/lyon.svg"]');
         self::assertSelectorExists('a[href="https://meetup.example/lyon"]');
         self::assertSelectorExists('a[href="https://linkedin.example/lyon"]');
         self::assertSelectorExists('a[href="https://bluesky.example/lyon"]');
@@ -38,6 +39,7 @@ final class AntenneTest extends WebTestCase
         $this->callWithAntenne('bordeaux');
 
         self::assertResponseIsSuccessful();
+        self::assertSelectorExists('link[href="https://afup.example/logo/bordeaux.svg"]');
         self::assertSelectorExists('a[href="https://meetup.example/bordeaux"]');
         self::assertSelectorNotExists('a[href="https://linkedin.example/bordeaux"]');
         self::assertSelectorNotExists('a[href="https://bluesky.example/bordeaux"]');

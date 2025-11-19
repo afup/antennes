@@ -19,6 +19,9 @@ final class MockClientCallback
             return new JsonMockResponse([
                 'code' => 'lyon',
                 'label' => 'Lyon',
+                'logo' => [
+                    'simple' => 'https://afup.example/logo/lyon.svg',
+                ],
                 'links' => [
                     'meetup' => 'https://meetup.example/lyon',
                     'linkedin' => 'https://linkedin.example/lyon',
@@ -31,6 +34,9 @@ final class MockClientCallback
             return new JsonMockResponse([
                 'code' => 'bordeaux',
                 'label' => 'Bordeaux',
+                'logo' => [
+                    'simple' => 'https://afup.example/logo/bordeaux.svg',
+                ],
                 'links' => [
                     'meetup' => 'https://meetup.example/bordeaux',
                     'linkedin' => null,
