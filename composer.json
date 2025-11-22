@@ -12,19 +12,19 @@
         "cuyz/valinor-bundle": "^2.1",
         "runtime/frankenphp-symfony": "^0.2.0",
         "symfony/asset": "7.3.*",
-        "symfony/asset-mapper": "7.3.*",
-        "symfony/cache": "7.3.*",
-        "symfony/console": "7.3.*",
-        "symfony/dotenv": "7.3.*",
+        "symfony/asset-mapper": "7.3.5",
+        "symfony/cache": "7.3.6",
+        "symfony/console": "7.3.6",
+        "symfony/dotenv": "7.3.2",
         "symfony/flex": "^2.10",
-        "symfony/framework-bundle": "7.3.*",
-        "symfony/http-client": "7.3.*",
+        "symfony/framework-bundle": "7.3.6",
+        "symfony/http-client": "7.3.6",
         "symfony/monolog-bundle": "^3.10",
-        "symfony/runtime": "7.3.*",
-        "symfony/twig-bundle": "7.3.*",
+        "symfony/runtime": "7.3.4",
+        "symfony/twig-bundle": "7.3.4",
         "symfony/ux-icons": "^2.31",
         "symfony/ux-twig-component": "^2.31",
-        "symfony/yaml": "7.3.*",
+        "symfony/yaml": "7.3.5",
         "symfonycasts/tailwind-bundle": "^0.11.1",
         "twig/extra-bundle": "^3.22.1",
         "twig/twig": "^3.22"
@@ -88,7 +88,7 @@
         "phpstan/phpstan": "^2.1.32",
         "phpstan/phpstan-symfony": "^2.0.8",
         "phpunit/phpunit": "^12.4.3",
-        "symfony/browser-kit": "7.3.*",
-        "symfony/css-selector": "7.3.*"
+        "symfony/browser-kit": "7.3.6",
+        "symfony/css-selector": "7.3.6"
     }
 }
