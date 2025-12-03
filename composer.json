@@ -10,6 +10,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "cuyz/valinor-bundle": "^2.1",
+        "league/commonmark": "^2.8",
         "runtime/frankenphp-symfony": "^0.2.0",
         "symfony/asset": "7.3.*",
         "symfony/asset-mapper": "7.3.*",
@@ -26,7 +27,9 @@
         "symfony/ux-twig-component": "^2.31",
         "symfony/yaml": "7.3.*",
         "symfonycasts/tailwind-bundle": "^0.11.1",
-        "twig/extra-bundle": "^3.22.1",
+        "twig/extra-bundle": "^3.22",
+        "twig/intl-extra": "^3.22",
+        "twig/markdown-extra": "^3.22",
         "twig/twig": "^3.22.1"
     },
     "config": {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Dto\Antenne;
+use CuyZ\Valinor\Mapper\Source\Source;
 use CuyZ\Valinor\MapperBuilder;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
@@ -22,7 +23,9 @@ final readonly class ApiAntennesRepository implements AntennesRepository
     public function get(string $code): ?Antenne
     {
         try {
-            $response = $this->httpClient->request('GET', '/api/antennes/' . $code);
+            $response = $this->httpClient->request('GET', '/api/antennes/' . $code, [
+                'timeout' => 3,
+            ]);
         } catch (TransportExceptionInterface) {
             return null;
         }
@@ -35,7 +38,8 @@ final readonly class ApiAntennesRepository implements AntennesRepository
 
         return $this->mapperBuilder
             ->allowSuperfluousKeys()
+            ->supportDateFormats('Y-m-d H:i:s')
             ->mapper()
-            ->map(Antenne::class, $rawAntenne);
+            ->map(Antenne::class, Source::array($rawAntenne)->camelCaseKeys());
     }
 }

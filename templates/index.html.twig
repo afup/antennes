@@ -33,20 +33,43 @@
             <a href="https://afup.org/association/devenir-membre" class="hover:underline">Devenir membre</a>
         </div>
 
-        <div class="mx-auto sm:max-w-96">
-            <twig:Link url="{{ antenne.links.meetup }}" icon="meetup">Meetup</twig:Link>
+        <div class="sm:mx-auto sm:max-w-5xl sm:flex">
+            <div class="sm:mx-auto sm:max-w-80 p-4 sm:p-0 flex flex-col gap-4 grow">
+                <twig:Link url="{{ antenne.links.meetup }}" icon="meetup">Meetup</twig:Link>
 
-            {% if antenne.links.linkedin %}
-                <twig:Link url="{{ antenne.links.linkedin }}" icon="linkedin">LinkedIn</twig:Link>
+                {% if antenne.links.linkedin %}
+                    <twig:Link url="{{ antenne.links.linkedin }}" icon="linkedin">LinkedIn</twig:Link>
+                {% endif %}
+
+                {% if antenne.links.bluesky %}
+                    <twig:Link url="{{ antenne.links.bluesky }}" icon="bluesky">Bluesky</twig:Link>
+                {% endif %}
+
+                <hr class="border-t-white border-t-2 mx-32"/>
+
+                <twig:Link url="https://event.afup.org" icon="event" data-qa="current-event">{{ currentEvent }}</twig:Link>
+            </div>
+
+            {% if antenne.nextMeetup %}
+                <div class="sm:mx-auto max-w-2xl px-5 pb-12 pt-3 sm:pt-0 text-white sm:block grow">
+                    <div class="border-b-12 mb-4 flex flex-col sm:flex-row sm:items-end drop-shadow-lg">
+                        <h2 class="text-3xl grow">Prochain meetup</h2>
+                        <small>{{ antenne.nextMeetup.date|format_datetime(pattern: 'EEEE d LLLL à H:mm', locale: 'fr') }}</small>
+                    </div>
+
+                    <a href="{{ antenne.nextMeetup.url }}" class="hover:underline italic">
+                        <h3 class="text-xl">{{ antenne.nextMeetup.title }}</h3>
+                    </a>
+
+                    <div class="pt-5 text-slate-100">{{ antenne.nextMeetup.description|nl2br|markdown_to_html }}</div>
+
+                    <div class="max-w-96 mt-6">
+                        <twig:Link url="{{ antenne.nextMeetup.url }}">
+                            Rejoindre<span class="inline sm:hidden"> le prochain meetup</span>
+                        </twig:Link>
+                    </div>
+                </div>
             {% endif %}
-
-            {% if antenne.links.bluesky %}
-                <twig:Link url="{{ antenne.links.bluesky }}" icon="bluesky">Bluesky</twig:Link>
-            {% endif %}
-
-            <hr class="border-t-white mx-32"/>
-
-            <twig:Link url="https://event.afup.org" icon="event" data-qa="current-event">{{ currentEvent }}</twig:Link>
         </div>
     </main>
 

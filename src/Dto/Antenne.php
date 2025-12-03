@@ -11,5 +11,6 @@ final readonly class Antenne
         public string $label,
         public Logo $logo,
         public Links $links,
+        public ?Meetup $nextMeetup = null,
     ) {}
 }
