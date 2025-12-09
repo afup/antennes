@@ -20,7 +20,7 @@
         "symfony/flex": "^2.10",
         "symfony/framework-bundle": "7.3.*",
         "symfony/http-client": "7.3.*",
-        "symfony/monolog-bundle": "^3.11.0",
+        "symfony/monolog-bundle": "^3.11.1",
         "symfony/runtime": "7.3.*",
         "symfony/twig-bundle": "7.3.*",
         "symfony/ux-icons": "^2.31",
