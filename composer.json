@@ -26,7 +26,7 @@
         "symfony/ux-icons": "^2.31",
         "symfony/ux-twig-component": "^2.31",
         "symfony/yaml": "7.3.*",
-        "symfonycasts/tailwind-bundle": "^0.11.1",
+        "symfonycasts/tailwind-bundle": "^0.12.0",
         "twig/extra-bundle": "^3.22.1",
         "twig/intl-extra": "^3.22.1",
         "twig/markdown-extra": "^3.22",
