@@ -22,6 +22,7 @@
         "symfony/http-client": "7.3.*",
         "symfony/monolog-bundle": "^3.11.1",
         "symfony/runtime": "7.3.*",
+        "symfony/string": "7.3.*",
         "symfony/twig-bundle": "7.3.*",
         "symfony/ux-icons": "^2.31",
         "symfony/ux-twig-component": "^2.31",
