@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
@@ -13,6 +14,11 @@ use function Symfony\Component\String\s;
 #[AsController]
 final readonly class ArchivesController
 {
+    public function __construct(
+        #[Autowire('%kernel.environment%')]
+        private string $env,
+    ) {}
+
     #[Route(
         path: '/{year}/{month<\d+>}/{day}/{slug}',
         requirements: [
@@ -37,10 +43,15 @@ final readonly class ArchivesController
     )]
     public function article(string $code, string $year, string $month, string $day, string $slug): RedirectResponse
     {
-        $slug = s($slug)->ensureEnd('/index.html');
+        $slug = s($slug)->ensureEnd('/')->ensureEnd('index.html');
+        $path = implode('/', [$year, $month, $day, $slug]);
+
+        if ($this->env === 'dev') {
+            $path = $code . '/' . $path;
+        }
 
         return new RedirectResponse(
-            sprintf('/archives/%s/%s/%s/%s/%s', $code, $year, $month, $day, $slug),
+            '/archives/' . $path,
             Response::HTTP_MOVED_PERMANENTLY,
         );
     }
@@ -57,7 +68,11 @@ final readonly class ArchivesController
     )]
     public function paris(string $path): RedirectResponse
     {
+        if ($this->env === 'dev') {
+            $path = 'paris/' . $path;
+        }
+
         // Paris est la seule ville où les articles ne sont pas rangés par date, mais tous à la racine
-        return new RedirectResponse('/archives/paris/' . $path . '.html', Response::HTTP_MOVED_PERMANENTLY);
+        return new RedirectResponse('/archives/' . $path . '.html', Response::HTTP_MOVED_PERMANENTLY);
     }
 }

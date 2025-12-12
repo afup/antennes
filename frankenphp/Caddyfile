@@ -27,7 +27,7 @@
 		}
 	}
 
-	root /app/public
+	root * /app/public
 	encode zstd br gzip
 
 	mercure {
@@ -50,8 +50,21 @@
 	# Disable Topics tracking if not enabled explicitly: https://github.com/jkarlin/topics
 	header ?Permissions-Policy "browsing-topics=()"
 
+	# Block direct access to archives_content
+	@archivesContentDirect path /archives_content /archives_content/*
+	respond @archivesContentDirect "Not Found" 404
+
+	# Serve archives_content at /archives path
+	@archives path /archives /archives/*
+	handle @archives {
+		root * /app/public/archives_content
+		uri strip_prefix /archives
+		file_server
+	}
+
 	@phpRoute {
 		not path /.well-known/mercure*
+		not path /archives*
 		not file {path}
 	}
 	rewrite @phpRoute index.php
