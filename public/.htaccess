@@ -2,5 +2,10 @@ RewriteEngine On
 
 RewriteRule ^archives_content/ - [F]
 
+# Set DirectoryIndex only for /archives URLs
+<If "%{REQUEST_URI} =~ m#^/archives/#">
+    DirectoryIndex index.html
+</If>
+
 RewriteCond %{HTTP_HOST} ^([^.]+)\.afup\.org$  [NC]
 RewriteRule ^archives/(.*)$ archives_content/%1/$1 [L]
