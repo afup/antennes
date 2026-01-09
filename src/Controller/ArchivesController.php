@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
 use Symfony\Component\Routing\Attribute\Route;
+
 use function Symfony\Component\String\s;
 
 #[AsController]
@@ -28,7 +29,7 @@ final readonly class ArchivesController
             'slug' => '.+',
         ],
         host: '{code}.afup.org',
-        priority: 10
+        priority: 10,
     )]
     #[Route(
         path: '/{code}/{year}/{month}/{day}/{slug}',
@@ -59,7 +60,7 @@ final readonly class ArchivesController
     #[Route(
         path: '/{path}.html',
         host: 'paris.afup.org',
-        priority: 10
+        priority: 10,
     )]
     #[Route(
         path: '/paris/{path}.html',
