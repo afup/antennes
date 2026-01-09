@@ -6,7 +6,7 @@ RewriteCond %{HTTP_HOST} ^([^.]+)\.afup\.org$  [NC]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_URI} !^/$
 RewriteCond %{DOCUMENT_ROOT}/archives_content/%1%{REQUEST_URI}/index.html -f
-RewriteRule ^(.*)/?$ /archives/$1/ [R=302,L]
+RewriteRule ^(.*)/?$ /archives/$1 [R=302,L]
 
 RewriteCond %{HTTP_HOST} ^([^.]+)\.afup\.org$  [NC]
 RewriteCond %{REQUEST_FILENAME} !-f
