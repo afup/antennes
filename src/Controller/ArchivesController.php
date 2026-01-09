@@ -20,7 +20,7 @@ final readonly class ArchivesController
     ) {}
 
     #[Route(
-        path: '/{year}/{month<\d+>}/{day}/{slug}',
+        path: '/{year}/{month}/{day}/{slug}',
         requirements: [
             'year' => '[0-9]{4}',
             'month' => '[0-9]{2}',
