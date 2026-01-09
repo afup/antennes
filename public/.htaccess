@@ -7,5 +7,8 @@ RewriteRule ^archives_content/ - [F]
     DirectoryIndex index.html
 </If>
 
-RewriteCond %{HTTP_HOST} ^([^.]+)\.afup\.org$  [NC]
-RewriteRule ^archives/(.*)$ archives_content/%1/$1 [L]
+#RewriteCond %{HTTP_HOST} ^([^.]+)\.afup\.org$  [NC]
+#RewriteRule ^archives/(.*)$ archives_content/%1/$1 [L]
+
+RewriteCond %{HTTP_HOST} ^([^.]+)\.afup\.org$ [NC]
+RewriteRule ^archives/(.*)$ archives_content/%1/$1 [L,R=302]
