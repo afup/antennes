@@ -1,0 +1,8 @@
+Options -Indexes
+
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} ^([^.]+)\.afup\.org$  [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{DOCUMENT_ROOT}/archives_content/%1/$1 -f
+RewriteRule ^(.*)$ %{DOCUMENT_ROOT}/archives_content/%1/$1 [L]

@@ -1,0 +1,2 @@
+RewriteCond %{THE_REQUEST} \s/archives_content/ [NC]
+RewriteRule ^ - [F,L]
