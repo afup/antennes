@@ -11,7 +11,7 @@
         "ext-iconv": "*",
         "cuyz/valinor-bundle": "^2.2.0",
         "league/commonmark": "^2.8",
-        "runtime/frankenphp-symfony": "^0.2.0",
+        "runtime/frankenphp-symfony": "^1.0.0",
         "symfony/asset": "7.3.*",
         "symfony/asset-mapper": "7.3.*",
         "symfony/cache": "7.3.*",
