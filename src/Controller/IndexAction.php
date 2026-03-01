@@ -41,6 +41,10 @@ final class IndexAction extends AbstractController
             return $this->redirect('https://afup.org');
         }
 
+        if ($code === 'aix-marseille') {
+            $code = 'marseille';
+        }
+
         $antenne = $this->antennesRepository->get($code);
         if ($antenne === null) {
             return $this->error("Code `$code` is invalid");
