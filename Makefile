@@ -77,7 +77,7 @@ qa-test: public/assets
 
 ### Run PHPStan
 qa-phpstan:
-	$(PHP) vendor/bin/phpstan
+	$(PHP) vendor/bin/phpstan --memory-limit=-1
 
 ### Run PHP-CS-Fixer (dry-run)
 qa-cs:
