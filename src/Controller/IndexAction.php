@@ -45,6 +45,10 @@ final class IndexAction extends AbstractController
             $code = 'marseille';
         }
 
+        if ($code === 'hdf') {
+            $code = 'lille';
+        }
+
         $antenne = $this->antennesRepository->get($code);
         if ($antenne === null) {
             return $this->error("Code `$code` is invalid");
