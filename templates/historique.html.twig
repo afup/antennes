@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="sm:mx-auto sm:max-w-5xl sm:flex flex-col p-4 sm:p-0">
+
+        <nav class="text-white mb-5 text-2xl border-b w-full flex items-start overflow-x-auto md:overflow-hidden">
+            <ul class="flex flex-nowrap items-end text-heading gap-4 md:gap-8">
+                {% for year in years %}
+                    <li class="{% if selectedYear != year or selectedYear == 'anciens' %}hover:border-b-2{% endif %}">
+                        <a href="{{ path('historique', { code: antenne.code, year: year }) }}"
+                           class="{% if selectedYear == year %}font-black text-3xl md:text-4xl{% endif %}">{{ year|capitalize }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+        <main class="flex flex-col gap-5 mb-5 md:mb-0">
+            {% for meetup in selectedMeetups %}
+                <article class="group relative flex flex-col bg-white p-5 rounded shadow-xl gap-5 cursor-pointer transition-transform hover:-translate-y-0.5">
+                    <a href="{{ meetup.url }}" class="absolute inset-0" aria-label="{{ meetup.title }}"></a>
+                    <input type="checkbox" id="desc-{{ loop.index }}" class="hidden peer">
+                    <div class="flex flex-col md:flex-row gap-5">
+                        {% if meetup.photo %}
+                            <img class="w-full rounded md:object-cover md:h-40 md:w-3xs shrink-0" src="{{ meetup.photo }}" alt="">
+                        {% endif %}
+                        <header class="flex flex-col flex-1">
+                            <h5 class="text-2xl font-bold tracking-tight">{{ meetup.title }}</h5>
+                            <small>
+                                {{ meetup.date|format_datetime(pattern: 'EEEE d LLLL à H:mm', locale: 'fr') }}
+                                {% if selectedYear == 'anciens' %}
+                                    {{ meetup.date.format('Y') }}
+                                {% endif %}
+                            </small>
+                            <label for="desc-{{ loop.index }}"
+                                   class="relative z-10 cursor-pointer inline-block mt-auto pt-2 underline">
+                                <span class="group-has-[:checked]:hidden">Voir la description</span>
+                                <span class="hidden group-has-[:checked]:inline">Masquer la description</span>
+                            </label>
+                        </header>
+                    </div>
+
+                    <div class="hidden peer-checked:block">
+                        {{ meetup.description|nl2br|markdown_to_html }}
+                    </div>
+                </article>
+            {% endfor %}
+        </main>
+
+    </div>
+
+{% endblock %}

@@ -27,6 +27,8 @@ final class MockClientCallback
                     'linkedin' => 'https://linkedin.example/lyon',
                     'bluesky' => 'https://bluesky.example/lyon',
                 ],
+                'photo' => 'https://photo.example/lyon.jpeg',
+                'meetups' => [],
             ]);
         }
 
@@ -42,6 +44,8 @@ final class MockClientCallback
                     'linkedin' => null,
                     'bluesky' => null,
                 ],
+                'photo' => 'https://photo.example/bordeaux.jpeg',
+                'meetups' => [],
             ]);
         }
 

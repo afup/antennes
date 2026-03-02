@@ -12,10 +12,12 @@ use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(
     path: '/',
+    name: 'home',
     host: '{code}.afup.org',
 )]
 #[Route(
     path: '/{code?}',
+    name: 'home',
     env: 'dev',
 )]
 final class IndexAction extends AbstractController

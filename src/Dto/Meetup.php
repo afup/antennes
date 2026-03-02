@@ -9,8 +9,9 @@ final readonly class Meetup
     public function __construct(
         public string $title,
         public \DateTimeImmutable $date,
-        public string $location,
+        public ?string $location,
         public string $description,
         public string $url,
+        public ?string $photo,
     ) {}
 }

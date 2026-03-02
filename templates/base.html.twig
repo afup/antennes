@@ -5,13 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <title>{% block title %}AFUP - Antennes{% endblock %}</title>
+        <title>AFUP {{ antenne.label }}</title>
 
         {% block favicon %}
-            <link rel="icon" href="{{ asset('logos/afup.svg') }}" sizes="any" type="image/svg+xml">
+            <link rel="icon" href="{{ antenne.logo.simple }}" sizes="any" type="image/svg+xml">
         {% endblock %}
 
         {% block head %}{% endblock %}
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://{{ antenne.code }}.afup.org">
+        <meta property="og:title" content="AFUP {{ antenne.label }}">
+        <meta property="og:description" content="Site de l'antenne AFUP {{ antenne.label }}">
+        <meta property="og:site_name" content="AFUP {{ antenne.label }}">
 
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
@@ -26,7 +32,40 @@
 
         <div class="min-h-screen flex flex-col backdrop-blur-sm">
 
-            {% block body %}{% endblock %}
+            <main class="container mx-auto max-w-96 sm:max-w-none">
+                <div class="px-5 pt-10 md:pt-20 pb-5 md:pb-10">
+                    <div class="mx-auto sm:max-w-3xl">
+                        <a href="{{ path('home', { code: antenne.code }) }}">
+                            <img src="{{ asset('logos/afup-antenne-' ~ antenne.code ~ '.svg') }}"
+                                 class="drop-shadow-lg"
+                                 alt="Logo de l'antenne AFUP {{ antenne.label }}"/>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="text-white text-center p-4 sm:p-0 pb-4 sm:pb-10 text-xl sm:text-2xl md:block flex justify-around items-center gap-3">
+                    <a href="https://afup.org" class="hover:underline">afup.org</a>
+                    <span class="md:px-3">
+                        <twig:ux:icon name="separator" class="h-5 inline-block" />
+                    </span>
+                    <a href="https://afup.org/association/devenir-membre" class="hover:underline">Adhérer</a>
+                    <span class="md:px-3">
+                        <twig:ux:icon name="separator" class="h-5 inline-block" />
+                    </span>
+                    <a href="{{ path('historique', { code: antenne.code }) }}" class="hover:underline">Historique</a>
+                </div>
+
+                {% block body %}{% endblock %}
+
+            </main>
+
+            <footer class="mt-auto pb-4 px-5 text-slate-50 text-xs sm:text-sm flex justify-between">
+                <a href="https://github.com/afup/antennes" class="hover:underline">Code source</a>
+
+                <span>
+                    Hébergé sur <a href="https://clever.cloud" class="hover:underline">Clever Cloud</a>
+                </span>
+            </footer>
 
         </div>
 
