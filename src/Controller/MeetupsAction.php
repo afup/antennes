@@ -83,6 +83,12 @@ final class MeetupsAction extends AbstractController
             }
         }
 
+        // Si malgré tout ça il n'y a toujours pas de meetup sélectionnés,
+        // c'est qu'on est probablement arrivés sur une page directement.
+        if (count($selectedMeetups) === 0) {
+            return $this->redirectToRoute('home');
+        }
+
         usort($selectedMeetups, fn(Meetup $a, Meetup $b) => $b->date <=> $a->date);
 
         return $this->render('meetups.html.twig', [
