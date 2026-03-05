@@ -15,3 +15,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !^/meetups(/|$)
 RewriteCond %{DOCUMENT_ROOT}/archives_content/%1%{REQUEST_URI} -f
 RewriteRule ^(.*)$ /archives/$1 [R=302,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
