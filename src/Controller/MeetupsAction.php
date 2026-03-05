@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Dto\Antenne;
 use App\Dto\Meetup;
+use App\ValueResolver\Tenant;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -13,16 +13,16 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route(
     path: '/meetups/{year?}',
     name: 'meetups',
-    host: '{code}.afup.org',
+    host: '{subdomain}.afup.org',
 )]
 #[Route(
-    path: '/{code?}/meetups/{year?}',
+    path: '/{subdomain?}/meetups/{year?}',
     name: 'meetups',
     env: 'dev',
 )]
 final class MeetupsAction extends AbstractController
 {
-    public function __invoke(Antenne $antenne, int|string|null $year): Response
+    public function __invoke(Tenant $tenant, int|string|null $year): Response
     {
         if ($year === null) {
             $year = (int) date('Y');
@@ -33,7 +33,7 @@ final class MeetupsAction extends AbstractController
         $selectedMeetups = [];
 
         $years = [];
-        foreach ($antenne->meetups as $meetup) {
+        foreach ($tenant->antenne->meetups as $meetup) {
             $meetupYear = (int) $meetup->date->format('Y');
 
             $years[$meetupYear] = true;
@@ -55,7 +55,7 @@ final class MeetupsAction extends AbstractController
 
         if ($year === 'anciens') {
             $selectedMeetups = array_filter(
-                $antenne->meetups,
+                $tenant->antenne->meetups,
                 fn(Meetup $m) => in_array((int) $m->date->format('Y'), $olderYears),
             );
         }
@@ -64,7 +64,7 @@ final class MeetupsAction extends AbstractController
         if (is_int($year) && count($selectedMeetups) === 0) {
             $closestYearWithMeetups = 0;
 
-            foreach ($antenne->meetups as $meetup) {
+            foreach ($tenant->antenne->meetups as $meetup) {
                 $meetupYear = (int) $meetup->date->format('Y');
 
                 if ($meetupYear > $closestYearWithMeetups) {
@@ -74,7 +74,7 @@ final class MeetupsAction extends AbstractController
 
             $year = $closestYearWithMeetups;
 
-            foreach ($antenne->meetups as $meetup) {
+            foreach ($tenant->antenne->meetups as $meetup) {
                 $meetupYear = (int) $meetup->date->format('Y');
 
                 if ($meetupYear === $year) {
@@ -86,13 +86,15 @@ final class MeetupsAction extends AbstractController
         // Si malgré tout ça il n'y a toujours pas de meetup sélectionnés,
         // c'est qu'on est probablement arrivés sur une page directement.
         if (count($selectedMeetups) === 0) {
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('home', [
+                'subdomain' => $tenant->subdomain,
+            ]);
         }
 
         usort($selectedMeetups, fn(Meetup $a, Meetup $b) => $b->date <=> $a->date);
 
         return $this->render('meetups.html.twig', [
-            'antenne' => $antenne,
+            'tenant' => $tenant,
             'selectedYear' => $year,
             'years' => $recentYears,
             'selectedMeetups' => $selectedMeetups,

@@ -5,19 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <title>AFUP {{ antenne.label }}</title>
+        <title>AFUP {{ tenant.antenne.label }}</title>
 
         {% block favicon %}
-            <link rel="icon" href="{{ antenne.logo.simple }}" sizes="any" type="image/svg+xml">
+            <link rel="icon" href="{{ tenant.antenne.logo.simple }}" sizes="any" type="image/svg+xml">
         {% endblock %}
 
         {% block head %}{% endblock %}
 
         <meta property="og:type" content="website">
-        <meta property="og:url" content="https://{{ app.request.attributes.get('code') }}.afup.org">
-        <meta property="og:title" content="AFUP {{ antenne.label }}">
-        <meta property="og:description" content="Site de l'antenne AFUP {{ antenne.label }}">
-        <meta property="og:site_name" content="AFUP {{ antenne.label }}">
+        <meta property="og:url" content="https://{{ tenant.subdomain }}.afup.org">
+        <meta property="og:title" content="AFUP {{ tenant.antenne.label }}">
+        <meta property="og:description" content="Site de l'antenne AFUP {{ tenant.antenne.label }}">
+        <meta property="og:site_name" content="AFUP {{ tenant.antenne.label }}">
 
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
@@ -35,10 +35,10 @@
             <main class="container mx-auto max-w-96 sm:max-w-none">
                 <div class="px-5 pt-10 md:pt-20 pb-5 md:pb-10">
                     <div class="mx-auto sm:max-w-3xl">
-                        <a href="{{ path('home', { code: app.request.attributes.get('code') }) }}">
-                            <img src="{{ asset('logos/afup-antenne-' ~ antenne.code ~ '.svg') }}"
+                        <a href="{{ path('home', { subdomain: tenant.subdomain }) }}">
+                            <img src="{{ asset('logos/afup-antenne-' ~ tenant.antenne.code ~ '.svg') }}"
                                  class="drop-shadow-lg"
-                                 alt="Logo de l'antenne AFUP {{ antenne.label }}"/>
+                                 alt="Logo de l'antenne AFUP {{ tenant.antenne.label }}"/>
                         </a>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                     <span class="md:px-3">
                         <twig:ux:icon name="separator" class="h-5 inline-block" />
                     </span>
-                    <a href="{{ path('meetups', { code: app.request.attributes.get('code') }) }}" class="hover:underline">Meetups</a>
+                    <a href="{{ path('meetups', { subdomain: tenant.subdomain }) }}" class="hover:underline">Meetups</a>
                 </div>
 
                 {% block body %}{% endblock %}

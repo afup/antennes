@@ -28,11 +28,11 @@ final readonly class ArchivesController
             'day' => '[0-9]{2}',
             'slug' => '.+',
         ],
-        host: '{code}.afup.org',
+        host: '{subdomain}.afup.org',
         priority: 10,
     )]
     #[Route(
-        path: '/{code}/{year}/{month}/{day}/{slug}',
+        path: '/{subdomain}/{year}/{month}/{day}/{slug}',
         requirements: [
             'year' => '[0-9]{4}',
             'month' => '[0-9]{2}',
@@ -42,13 +42,13 @@ final readonly class ArchivesController
         priority: 10,
         env: 'dev',
     )]
-    public function article(string $code, string $year, string $month, string $day, string $slug): RedirectResponse
+    public function article(string $subdomain, string $year, string $month, string $day, string $slug): RedirectResponse
     {
         $slug = s($slug)->ensureEnd('/')->ensureEnd('index.html');
         $path = implode('/', [$year, $month, $day, $slug]);
 
         if ($this->env === 'dev') {
-            $path = $code . '/' . $path;
+            $path = $subdomain . '/' . $path;
         }
 
         return new RedirectResponse(

@@ -4,47 +4,42 @@ declare(strict_types=1);
 
 namespace App\ValueResolver;
 
-use App\Dto\Antenne;
 use App\Repository\AntennesRepository;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
 
-#[AsTaggedItem(index: 'antenne_code', priority: 150)]
-final readonly class CodeAntenneValueResolver implements ValueResolverInterface
+#[AsTaggedItem(index: 'tenant', priority: 150)]
+final readonly class TenantValueResolver implements ValueResolverInterface
 {
     public function __construct(
         private AntennesRepository $antennesRepository,
     ) {}
 
     /**
-     * @return iterable<Antenne>
+     * @return iterable<Tenant>
      */
     public function resolve(Request $request, ArgumentMetadata $argument): iterable
     {
         $argumentType = $argument->getType();
-        if ($argumentType !== Antenne::class) {
+        if ($argumentType !== Tenant::class) {
             return [];
         }
 
-        if (!$request->attributes->has('code')) {
+        if (!$request->attributes->has('subdomain')) {
             throw new CodeAntenneInvalideException();
         }
 
-        $code = $request->attributes->get('code');
-        if ($code === null) {
+        $code = $subdomain = $request->attributes->getString('subdomain', '');
+        if ($subdomain === '') {
             throw new CodeAntenneInvalideException();
         }
 
-        if ($code === 'aix-marseille') {
+        if ($subdomain === 'aix-marseille') {
             $code = 'marseille';
-        } elseif ($code === 'hdf') {
+        } elseif ($subdomain === 'hdf') {
             $code = 'lille';
-        }
-
-        if (!is_string($code)) {
-            throw new CodeAntenneInvalideException();
         }
 
         $antenne = $this->antennesRepository->get($code);
@@ -53,7 +48,7 @@ final readonly class CodeAntenneValueResolver implements ValueResolverInterface
         }
 
         return [
-            $antenne,
+            new Tenant($subdomain, $antenne),
         ];
     }
 }
