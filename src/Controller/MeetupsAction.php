@@ -60,6 +60,29 @@ final class MeetupsAction extends AbstractController
             );
         }
 
+        // Gestion du cas où il n'y a pas encore de meetups pour l'année en cours
+        if (is_int($year) && count($selectedMeetups) === 0) {
+            $closestYearWithMeetups = 0;
+
+            foreach ($antenne->meetups as $meetup) {
+                $meetupYear = (int) $meetup->date->format('Y');
+
+                if ($meetupYear > $closestYearWithMeetups) {
+                    $closestYearWithMeetups = $meetupYear;
+                }
+            }
+
+            $year = $closestYearWithMeetups;
+
+            foreach ($antenne->meetups as $meetup) {
+                $meetupYear = (int) $meetup->date->format('Y');
+
+                if ($meetupYear === $year) {
+                    $selectedMeetups[] = $meetup;
+                }
+            }
+        }
+
         usort($selectedMeetups, fn(Meetup $a, Meetup $b) => $b->date <=> $a->date);
 
         return $this->render('meetups.html.twig', [
