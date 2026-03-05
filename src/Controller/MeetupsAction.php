@@ -24,8 +24,29 @@ final class MeetupsAction extends AbstractController
 {
     public function __invoke(Tenant $tenant, int|string|null $year): Response
     {
+        // S'il n'y a pas d'année, on cherche la première ayant des meetups
         if ($year === null) {
-            $year = (int) date('Y');
+            $closestYearWithMeetups = 0;
+
+            foreach ($tenant->antenne->meetups as $meetup) {
+                $meetupYear = (int) $meetup->date->format('Y');
+
+                if ($meetupYear > $closestYearWithMeetups) {
+                    $closestYearWithMeetups = $meetupYear;
+                }
+            }
+
+            // S'il n'y a pas du tout de meetups, on revient sur la home
+            if ($closestYearWithMeetups === 0) {
+                return $this->redirectToRoute('home', [
+                    'subdomain' => $tenant->subdomain,
+                ]);
+            }
+
+            return $this->redirectToRoute('meetups', [
+                'subdomain' => $tenant->subdomain,
+                'year' => $closestYearWithMeetups,
+            ]);
         } elseif ($year !== 'anciens') {
             $year = (int) $year;
         }
@@ -58,29 +79,6 @@ final class MeetupsAction extends AbstractController
                 $tenant->antenne->meetups,
                 fn(Meetup $m) => in_array((int) $m->date->format('Y'), $olderYears),
             );
-        }
-
-        // Gestion du cas où il n'y a pas encore de meetups pour l'année en cours
-        if (is_int($year) && count($selectedMeetups) === 0) {
-            $closestYearWithMeetups = 0;
-
-            foreach ($tenant->antenne->meetups as $meetup) {
-                $meetupYear = (int) $meetup->date->format('Y');
-
-                if ($meetupYear > $closestYearWithMeetups) {
-                    $closestYearWithMeetups = $meetupYear;
-                }
-            }
-
-            $year = $closestYearWithMeetups;
-
-            foreach ($tenant->antenne->meetups as $meetup) {
-                $meetupYear = (int) $meetup->date->format('Y');
-
-                if ($meetupYear === $year) {
-                    $selectedMeetups[] = $meetup;
-                }
-            }
         }
 
         // Si malgré tout ça il n'y a toujours pas de meetup sélectionnés,
