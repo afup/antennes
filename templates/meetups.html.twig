@@ -8,7 +8,7 @@
             <ul class="flex flex-nowrap items-end text-heading gap-4 md:gap-8">
                 {% for year in years %}
                     <li class="{% if selectedYear != year or selectedYear == 'anciens' %}hover:border-b-2{% endif %}">
-                        <a href="{{ path('historique', { code: antenne.code, year: year }) }}"
+                        <a href="{{ path('meetups', { code: antenne.code, year: year }) }}"
                            class="{% if selectedYear == year %}font-black text-3xl md:text-4xl{% endif %}">{{ year|capitalize }}</a>
                     </li>
                 {% endfor %}

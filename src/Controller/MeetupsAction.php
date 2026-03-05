@@ -11,16 +11,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route(
-    path: '/historique/{year?}',
-    name: 'historique',
+    path: '/meetups/{year?}',
+    name: 'meetups',
     host: '{code}.afup.org',
 )]
 #[Route(
-    path: '/{code?}/historique/{year?}',
-    name: 'historique',
+    path: '/{code?}/meetups/{year?}',
+    name: 'meetups',
     env: 'dev',
 )]
-final class HistoriqueAction extends AbstractController
+final class MeetupsAction extends AbstractController
 {
     public function __invoke(Antenne $antenne, int|string|null $year): Response
     {
@@ -62,7 +62,7 @@ final class HistoriqueAction extends AbstractController
 
         usort($selectedMeetups, fn(Meetup $a, Meetup $b) => $b->date <=> $a->date);
 
-        return $this->render('historique.html.twig', [
+        return $this->render('meetups.html.twig', [
             'antenne' => $antenne,
             'selectedYear' => $year,
             'years' => $recentYears,
