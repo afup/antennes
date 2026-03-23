@@ -23,7 +23,7 @@
         "symfony/runtime": "8.0.*",
         "symfony/string": "8.0.*",
         "symfony/twig-bundle": "8.0.*",
-        "symfony/ux-icons": "^2.32.0",
+        "symfony/ux-icons": "^2.34.0",
         "symfony/ux-twig-component": "^2.32.0",
         "symfony/yaml": "8.0.*",
         "symfonycasts/tailwind-bundle": "^0.12.0",
