@@ -10,7 +10,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "cuyz/valinor-bundle": "^2.2.0",
-        "league/commonmark": "^2.8.1",
+        "league/commonmark": "^2.8.2",
         "symfony/asset": "8.0.*",
         "symfony/asset-mapper": "8.0.*",
         "symfony/cache": "8.0.*",
