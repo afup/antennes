@@ -27,10 +27,10 @@
         "symfony/ux-twig-component": "^2.32.0",
         "symfony/yaml": "8.0.*",
         "symfonycasts/tailwind-bundle": "^0.12.0",
-        "twig/extra-bundle": "^3.23.0",
-        "twig/intl-extra": "^3.23.0",
-        "twig/markdown-extra": "^3.23.0",
-        "twig/twig": "^3.23.0"
+        "twig/extra-bundle": "^3.24.0",
+        "twig/intl-extra": "^3.24.0",
+        "twig/markdown-extra": "^3.24.0",
+        "twig/twig": "^3.24.0"
     },
     "config": {
         "allow-plugins": {
