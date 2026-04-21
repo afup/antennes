@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b33f7574e195c44fd0b94980b9e65ebe",
+    "content-hash": "1465f6855904463dc4d8fc6c607cb96a",
     "packages": [
         {
             "name": "composer/semver",
@@ -4307,38 +4307,37 @@
         },
         {
             "name": "symfony/ux-twig-component",
-            "version": "v2.35.0",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-twig-component.git",
-                "reference": "d64b068d8339e905cd48974bdd6e9ba54dc8f247"
+                "reference": "dea344e320238234c94f63b152d65821c80cd103"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/d64b068d8339e905cd48974bdd6e9ba54dc8f247",
-                "reference": "d64b068d8339e905cd48974bdd6e9ba54dc8f247",
+                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/dea344e320238234c94f63b152d65821c80cd103",
+                "reference": "dea344e320238234c94f63b152d65821c80cd103",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
-                "symfony/dependency-injection": "^5.4|^6.0|^7.0|^8.0",
+                "php": ">=8.4",
+                "symfony/dependency-injection": "^7.4|^8.0",
                 "symfony/deprecation-contracts": "^2.2|^3.0",
-                "symfony/event-dispatcher": "^5.4|^6.0|^7.0|^8.0",
-                "symfony/property-access": "^5.4|^6.0|^7.0|^8.0",
+                "symfony/event-dispatcher": "^7.4|^8.0",
+                "symfony/property-access": "^7.4|^8.0",
                 "twig/twig": "^3.10.3"
             },
             "conflict": {
-                "symfony/config": "<5.4.0"
+                "symfony/config": "<6.4"
             },
             "require-dev": {
-                "symfony/console": "^5.4|^6.0|^7.0|^8.0",
-                "symfony/css-selector": "^5.4|^6.0|^7.0|^8.0",
-                "symfony/dom-crawler": "^5.4|^6.0|^7.0|^8.0",
-                "symfony/framework-bundle": "^5.4|^6.0|^7.0|^8.0",
-                "symfony/phpunit-bridge": "^6.0|^7.0|^8.0",
+                "phpunit/phpunit": "^11.1|^12.0",
+                "symfony/console": "^7.4|^8.0",
+                "symfony/css-selector": "^7.4|^8.0",
+                "symfony/dom-crawler": "^7.4|^8.0",
+                "symfony/framework-bundle": "^7.4|^8.0",
                 "symfony/stimulus-bundle": "^2.9.1|^3.0",
-                "symfony/twig-bundle": "^5.4|^6.0|^7.0|^8.0",
-                "symfony/webpack-encore-bundle": "^1.15|^2.3.0",
+                "symfony/twig-bundle": "^7.4|^8.0",
                 "twig/extra-bundle": "^3.10.3",
                 "twig/html-extra": "^3.10.3"
             },
@@ -4372,7 +4371,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-twig-component/tree/v2.35.0"
+                "source": "https://github.com/symfony/ux-twig-component/tree/v3.0.0"
             },
             "funding": [
                 {
@@ -4392,7 +4391,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-04-03T05:13:59+00:00"
+            "time": "2026-04-09T22:56:44+00:00"
         },
         {
             "name": "symfony/var-dumper",
