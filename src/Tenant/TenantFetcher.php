@@ -2,31 +2,28 @@
 
 declare(strict_types=1);
 
-namespace App\ValueResolver;
+namespace App\Tenant;
 
 use App\Repository\AntennesRepository;
-use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
-use Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata;
+use Symfony\Component\HttpFoundation\RequestStack;
 
-#[AsTaggedItem(index: 'tenant', priority: 150)]
-final readonly class TenantValueResolver implements ValueResolverInterface
+final readonly class TenantFetcher
 {
     public function __construct(
         private AntennesRepository $antennesRepository,
+        private RequestStack $requestStack,
     ) {}
 
-    /**
-     * @return iterable<Tenant>
-     */
-    public function resolve(Request $request, ArgumentMetadata $argument): iterable
+    public function current(): Tenant
     {
-        $argumentType = $argument->getType();
-        if ($argumentType !== Tenant::class) {
-            return [];
-        }
+        return $this->fromRequest(
+            $this->requestStack->getCurrentRequest() ?? throw new \LogicException('No current request'),
+        );
+    }
 
+    public function fromRequest(Request $request): Tenant
+    {
         if (!$request->attributes->has('subdomain')) {
             throw new CodeAntenneInvalideException();
         }
@@ -47,8 +44,6 @@ final readonly class TenantValueResolver implements ValueResolverInterface
             throw new CodeAntenneInvalideException();
         }
 
-        return [
-            new Tenant($subdomain, $antenne),
-        ];
+        return new Tenant($subdomain, $antenne);
     }
 }
