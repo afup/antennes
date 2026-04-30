@@ -1,5 +1,7 @@
 twig:
     file_name_pattern: '*.twig'
+    globals:
+        jsonld: '@App\Seo\SchemaGenerator'
 
 when@test:
     twig:

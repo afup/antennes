@@ -1,5 +1,25 @@
 {% extends 'base.html.twig' %}
 
+{% block page_title %}
+    {% if selectedYear == 'anciens' %}
+        Historique des meetups - AFUP {{ tenant.antenne.label }}
+    {% else %}
+        Meetups {{ selectedYear }} - AFUP {{ tenant.antenne.label }}
+    {% endif %}
+{% endblock %}
+
+{% block page_description %}
+    {% if selectedYear == 'anciens' %}
+        Historique de tous les meetups AFUP {{ tenant.antenne.label }}.
+    {% else %}
+        Retrouvez les meetups AFUP {{ tenant.antenne.label }} de {{ selectedYear }}.
+    {% endif %}
+{% endblock %}
+
+{% block jsonld %}
+    {{ jsonld.events(selectedMeetups).toScript()|raw }}
+{% endblock %}
+
 {% block body %}
 
     <div class="sm:mx-auto sm:max-w-5xl sm:flex flex-col p-4 sm:p-0">
@@ -22,7 +42,7 @@
                     <input type="checkbox" id="desc-{{ loop.index }}" class="hidden peer">
                     <div class="flex flex-col md:flex-row gap-5">
                         {% if meetup.photo %}
-                            <img class="w-full rounded md:object-cover md:h-40 md:w-3xs shrink-0" src="{{ meetup.photo }}" alt="">
+                            <img class="w-full rounded md:object-cover md:h-40 md:w-3xs shrink-0" src="{{ meetup.photo }}" alt="{{ meetup.title }}">
                         {% endif %}
                         <header class="flex flex-col flex-1">
                             <h5 class="text-2xl font-bold tracking-tight">{{ meetup.title }}</h5>

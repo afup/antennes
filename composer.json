@@ -11,6 +11,7 @@
         "ext-iconv": "*",
         "cuyz/valinor-bundle": "^2.3.0",
         "league/commonmark": "^2.8.2",
+        "spatie/schema-org": "^4.0",
         "symfony/asset": "8.0.*",
         "symfony/asset-mapper": "8.0.*",
         "symfony/cache": "8.0.*",

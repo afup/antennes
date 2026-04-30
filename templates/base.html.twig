@@ -5,7 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-        <title>AFUP {{ tenant.antenne.label }}</title>
+        {% set page_title %}{% block page_title %}AFUP {{ tenant.antenne.label }}{% endblock %}{% endset %}
+        {% set page_description %}{% block page_description %}Site de l'antenne AFUP {{ tenant.antenne.label }}.{% endblock %}{% endset %}
+
+        {% if app.request.attributes.get('_route') %}
+            {% set canonical_url = url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+        {% else %}
+            {% set canonical_url = app.request.schemeAndHttpHost %}
+        {% endif %}
+
+        <title>{{ page_title|trim }}</title>
+        <meta name="description" content="{{ page_description|trim }}">
+        <link rel="canonical" href="{{ canonical_url }}">
 
         {% block favicon %}
             <link rel="icon" href="{{ tenant.antenne.logo.simple }}" sizes="any" type="image/svg+xml">
@@ -14,10 +25,17 @@
         {% block head %}{% endblock %}
 
         <meta property="og:type" content="website">
-        <meta property="og:url" content="https://{{ tenant.subdomain }}.afup.org">
-        <meta property="og:title" content="AFUP {{ tenant.antenne.label }}">
-        <meta property="og:description" content="Site de l'antenne AFUP {{ tenant.antenne.label }}">
+        <meta property="og:url" content="{{ canonical_url }}">
+        <meta property="og:title" content="{{ page_title|trim }}">
+        <meta property="og:description" content="{{ page_description|trim }}">
         <meta property="og:site_name" content="AFUP {{ tenant.antenne.label }}">
+        {% block og_image %}
+            <meta property="og:image" content="{{ absolute_url(asset('logos/afup-antenne-' ~ tenant.antenne.code ~ '.svg')) }}">
+        {% endblock %}
+
+        {% block jsonld %}
+            {{ jsonld.organisation().toScript() | raw }}
+        {% endblock %}
 
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('styles/app.css') }}">

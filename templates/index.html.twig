@@ -1,5 +1,29 @@
 {% extends 'base.html.twig' %}
 
+{% block page_description %}
+    {% if tenant.antenne.nextMeetup %}
+        Prochain meetup AFUP {{ tenant.antenne.label }} : {{ tenant.antenne.nextMeetup.title }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block og_image %}
+    {% if tenant.antenne.nextMeetup and tenant.antenne.nextMeetup.photo %}
+        <meta property="og:image" content="{{ tenant.antenne.nextMeetup.photo }}">
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
+{% block jsonld %}
+    {% if tenant.antenne.nextMeetup %}
+        {{ jsonld.nextEvent().toScript()|raw }}
+    {% else %}
+        {{ parent() }}
+    {% endif %}
+{% endblock %}
+
 {% block body %}
 
     <div class="sm:mx-auto sm:max-w-5xl sm:flex">
