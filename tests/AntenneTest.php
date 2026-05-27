@@ -30,6 +30,9 @@ final class AntenneTest extends WebTestCase
         self::assertSelectorExists('a[href="https://meetup.example/lyon"]');
         self::assertSelectorExists('a[href="https://linkedin.example/lyon"]');
         self::assertSelectorExists('a[href="https://bluesky.example/lyon"]');
+        self::assertSelectorExists('a[href="https://cfp.example/lyon"]');
+        self::assertSelectorExists('a[href="https://github.example/lyon"]');
+        self::assertSelectorExists('a[href="https://discord.example/lyon"]');
 
         self::assertSelectorTextContains('[data-qa="current-event"]', 'PHP Tour 4242');
     }
@@ -43,6 +46,9 @@ final class AntenneTest extends WebTestCase
         self::assertSelectorExists('a[href="https://meetup.example/bordeaux"]');
         self::assertSelectorNotExists('a[href="https://linkedin.example/bordeaux"]');
         self::assertSelectorNotExists('a[href="https://bluesky.example/bordeaux"]');
+        self::assertSelectorNotExists('a[href="https://cfp.example/bordeaux"]');
+        self::assertSelectorNotExists('a[href="https://github.example/bordeaux"]');
+        self::assertSelectorNotExists('a[href="https://discord.example/bordeaux"]');
 
         self::assertSelectorTextContains('[data-qa="current-event"]', 'PHP Tour 4242');
     }

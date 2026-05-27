@@ -38,6 +38,18 @@
                 <twig:Link url="{{ tenant.antenne.links.bluesky }}" icon="bluesky">Bluesky</twig:Link>
             {% endif %}
 
+            {% if tenant.antenne.links.cfp %}
+                <twig:Link url="{{ tenant.antenne.links.cfp }}" icon="cfp">Appel à Conférences</twig:Link>
+            {% endif %}
+
+            {% if tenant.antenne.links.discord %}
+                <twig:Link url="{{ tenant.antenne.links.discord }}" icon="discord">Discord</twig:Link>
+            {% endif %}
+
+            {% if tenant.antenne.links.github %}
+                <twig:Link url="{{ tenant.antenne.links.github }}" icon="github">GitHub</twig:Link>
+            {% endif %}
+
             <hr class="border-t-white border-t-2 mx-32"/>
 
             <twig:Link url="https://event.afup.org" icon="event" data-qa="current-event">{{ currentEvent }}</twig:Link>
