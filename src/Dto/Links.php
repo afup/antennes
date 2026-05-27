@@ -10,5 +10,8 @@ final readonly class Links
         public string $meetup,
         public ?string $linkedin,
         public ?string $bluesky,
+        public ?string $cfp,
+        public ?string $discord,
+        public ?string $github,
     ) {}
 }
