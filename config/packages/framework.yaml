@@ -5,6 +5,11 @@ framework:
     # Note that the session will be started ONLY if you read or write from it.
     session: true
 
+    # Le TLS est terminé par le reverse proxy : on lui fait confiance pour
+    # récupérer le schéma (https) et l'IP du client via les en-têtes X-Forwarded-*.
+    trusted_proxies: '%env(TRUSTED_PROXIES)%'
+    trusted_headers: ['x-forwarded-for', 'x-forwarded-proto', 'x-forwarded-port']
+
     #esi: true
     #fragments: true
 

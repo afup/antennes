@@ -52,4 +52,20 @@ final class AntenneTest extends WebTestCase
 
         self::assertSelectorTextContains('[data-qa="current-event"]', 'PHP Tour 4242');
     }
+
+    public function test_canonical_url_uses_https_behind_reverse_proxy(): void
+    {
+        $client = self::createClient();
+        $client->request('GET', '/', server: [
+            'HTTP_HOST' => 'lyon.afup.org',
+            'HTTPS' => false,
+            'REMOTE_ADDR' => '10.0.0.1',
+            'HTTP_X_FORWARDED_PROTO' => 'https',
+            'HTTP_X_FORWARDED_PORT' => '443',
+        ]);
+
+        self::assertResponseIsSuccessful();
+        self::assertSelectorExists('link[rel="canonical"][href="https://lyon.afup.org/"]');
+        self::assertSelectorExists('meta[property="og:url"][content="https://lyon.afup.org/"]');
+    }
 }
