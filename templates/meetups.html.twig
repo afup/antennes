@@ -37,6 +37,7 @@
 
         <main class="flex flex-col gap-5 mb-5 md:mb-0">
             {% for meetup in selectedMeetups %}
+                {% set isUpcoming = meetup.date > date() %}
                 <article class="group relative flex flex-col bg-white p-5 rounded shadow-xl gap-5 cursor-pointer transition-transform hover:-translate-y-0.5">
                     <a href="{{ meetup.url }}" class="absolute inset-0" aria-label="{{ meetup.title }}"></a>
                     <input type="checkbox" id="desc-{{ loop.index }}" class="hidden peer">
@@ -45,7 +46,10 @@
                             <img class="w-full rounded md:object-cover md:h-40 md:w-3xs shrink-0" src="{{ meetup.photo }}" alt="{{ meetup.title }}">
                         {% endif %}
                         <header class="flex flex-col flex-1">
-                            <h5 class="text-2xl font-bold tracking-tight">{{ meetup.title }}</h5>
+                            {% if isUpcoming %}
+                                <span class="pointer-events-none self-start mb-2 rounded bg-ruby-500 px-2 py-0.5 text-sm font-bold text-white md:absolute md:top-0 md:right-0 md:mb-0 md:rounded-none md:rounded-tr md:rounded-bl md:px-4 md:py-2 md:text-base md:shadow" data-qa="upcoming-meetup">À venir</span>
+                            {% endif %}
+                            <h5 class="text-2xl font-bold tracking-tight {% if isUpcoming %}md:pr-24{% endif %}">{{ meetup.title }}</h5>
                             <small>
                                 {{ meetup.date|format_datetime(pattern: 'EEEE d LLLL à H:mm', locale: 'fr') }}
                                 {% if selectedYear == 'anciens' %}
