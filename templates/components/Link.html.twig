@@ -1,8 +1,16 @@
+{% props url, icon = null, variant = 'default' %}
+
+{% set variants = {
+    default: 'bg-white text-afup-800 hover:bg-sky-300',
+    marine: 'bg-afup-700 text-white hover:bg-afup-800',
+    rose: 'bg-ruby-500 text-white hover:bg-ruby-700',
+} %}
+
 <a {{ attributes }}
     href="{{ url }}"
-    class="block static cursor-pointer items-center text-center text-lg rounded-xl border-2 border-slate-700 bg-slate-100 text-black shadow px-4 py-3 hover:bg-sky-300 transition">
-    {% if icon is defined %}
-        <twig:ux:icon name="{{ icon }}" class="h-7 block absolute" />
+    class="block static cursor-pointer items-center text-center text-lg font-semibold rounded-xl shadow px-4 py-3 transition {{ variants[variant] ?? variants.default }}">
+    {% if icon %}
+        <twig:ux:icon name="{{ icon }}" class="h-7 block absolute {{ variant == 'default' ? 'text-black' }}" />
     {% endif %}
     <span>{% block content %}{% endblock %}</span>
 </a>
