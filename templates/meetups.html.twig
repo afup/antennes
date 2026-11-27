@@ -57,9 +57,11 @@
                                 {% endif %}
                             </small>
                             <label for="desc-{{ loop.index }}"
-                                   class="relative z-10 cursor-pointer inline-block mt-auto pt-2 underline">
+                                   class="relative z-10 cursor-pointer inline-flex items-center gap-1 self-end mt-auto pt-2 underline">
                                 <span class="group-has-[:checked]:hidden">Voir la description</span>
                                 <span class="hidden group-has-[:checked]:inline">Masquer la description</span>
+                                <twig:ux:icon name="mdi:chevron-down" class="size-5 group-has-[:checked]:hidden" aria-hidden="true" />
+                                <twig:ux:icon name="mdi:chevron-up" class="size-5 hidden group-has-[:checked]:block" aria-hidden="true" />
                             </label>
                         </header>
                     </div>
