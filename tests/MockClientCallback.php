@@ -33,6 +33,14 @@ final class MockClientCallback
                 ],
                 'photo' => 'https://photo.example/lyon.jpeg',
                 'meetups' => [],
+                'next_meetup' => [
+                    'title' => 'Prochain meetup Lyon',
+                    'date' => '2026-06-08 18:30:00',
+                    'location' => null,
+                    'description' => 'Description du meetup',
+                    'url' => 'https://meetup.example/lyon/next',
+                    'photo' => 'https://photo.example/lyon-next-meetup.jpeg',
+                ],
             ]);
         }
 
