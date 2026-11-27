@@ -29,7 +29,7 @@ final readonly class SchemaGenerator
         $logo = $this->packages->getUrl('logos/afup-antenne-' . $tenant->antenne->code . '.svg');
         $host = $this->requestStack->getCurrentRequest()?->getSchemeAndHttpHost() ?? '';
 
-        return Schema::organization()
+        $schema = Schema::organization()
             ->name('AFUP ' . $tenant->antenne->label)
             ->url(
                 $this->router->generate(
@@ -39,6 +39,12 @@ final readonly class SchemaGenerator
                 ),
             )
             ->logo($host . $logo);
+
+        if ($tenant->antenne->links->email !== null) {
+            $schema = $schema->email($tenant->antenne->links->email);
+        }
+
+        return $schema;
     }
 
     public function nextEvent(): ?Event

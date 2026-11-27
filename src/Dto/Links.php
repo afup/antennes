@@ -13,5 +13,6 @@ final readonly class Links
         public ?string $cfp,
         public ?string $discord,
         public ?string $github,
+        public ?string $email = null,
     ) {}
 }
