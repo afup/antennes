@@ -56,13 +56,22 @@
                                     {{ meetup.date.format('Y') }}
                                 {% endif %}
                             </small>
-                            <label for="desc-{{ loop.index }}"
-                                   class="relative z-10 cursor-pointer inline-flex items-center gap-1 self-end mt-auto pt-2 underline">
-                                <span class="group-has-[:checked]:hidden">Voir la description</span>
-                                <span class="hidden group-has-[:checked]:inline">Masquer la description</span>
-                                <twig:ux:icon name="mdi:chevron-down" class="size-5 group-has-[:checked]:hidden" aria-hidden="true" />
-                                <twig:ux:icon name="mdi:chevron-up" class="size-5 hidden group-has-[:checked]:block" aria-hidden="true" />
-                            </label>
+                            <div class="mt-auto pt-6 md:pt-2 flex items-center gap-4">
+                                {% if isUpcoming %}
+                                    <a href="{{ meetup.url }}"
+                                       class="relative z-10 shrink-0 rounded-xl bg-ruby-500 px-4 py-2 font-semibold text-white shadow transition hover:bg-ruby-700"
+                                       data-qa="meetup-register">Je m'inscris</a>
+                                {% endif %}
+                                <label for="desc-{{ loop.index }}"
+                                       class="relative z-10 cursor-pointer inline-flex items-center gap-1 ml-auto whitespace-nowrap underline">
+                                    {# Sur mobile, texte court : le chevron indique l'état ouvert/fermé #}
+                                    <span class="sm:hidden">Description</span>
+                                    <span class="hidden sm:inline sm:group-has-[:checked]:hidden">Voir la description</span>
+                                    <span class="hidden sm:group-has-[:checked]:inline">Masquer la description</span>
+                                    <twig:ux:icon name="mdi:chevron-down" class="size-5 group-has-[:checked]:hidden" aria-hidden="true" />
+                                    <twig:ux:icon name="mdi:chevron-up" class="size-5 hidden group-has-[:checked]:block" aria-hidden="true" />
+                                </label>
+                            </div>
                         </header>
                     </div>
 
