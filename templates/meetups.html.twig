@@ -27,7 +27,7 @@
         <nav class="text-white mb-5 text-2xl border-b w-full flex items-start overflow-x-auto md:overflow-hidden">
             <ul class="flex flex-nowrap items-end text-heading gap-4 md:gap-8">
                 {% for year in years %}
-                    <li class="{% if selectedYear != year or selectedYear == 'anciens' %}hover:border-b-2{% endif %}">
+                    <li class="{% if selectedYear != year %}hover:border-b-2{% endif %}">
                         <a href="{{ path('meetups', { subdomain: tenant.subdomain, year: year }) }}"
                            class="{% if selectedYear == year %}font-black text-3xl md:text-4xl{% endif %}">{{ year|capitalize }}</a>
                     </li>
@@ -64,7 +64,6 @@
                                 {% endif %}
                                 <label for="desc-{{ loop.index }}"
                                        class="relative z-10 cursor-pointer inline-flex items-center gap-1 ml-auto whitespace-nowrap underline">
-                                    {# Sur mobile, texte court : le chevron indique l'état ouvert/fermé #}
                                     <span class="sm:hidden">Description</span>
                                     <span class="hidden sm:inline sm:group-has-[:checked]:hidden">Voir la description</span>
                                     <span class="hidden sm:group-has-[:checked]:inline">Masquer la description</span>
