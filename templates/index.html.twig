@@ -66,6 +66,12 @@
                     <small>{{ tenant.antenne.nextMeetup.date|format_datetime(pattern: 'EEEE d LLLL à H:mm', locale: 'fr') }}</small>
                 </div>
 
+                {% if tenant.antenne.nextMeetup.photo %}
+                    <a href="{{ tenant.antenne.nextMeetup.url }}" class="block mb-4">
+                        <img class="w-full rounded shadow-xl object-cover" src="{{ tenant.antenne.nextMeetup.photo }}" alt="{{ tenant.antenne.nextMeetup.title }}" data-qa="next-meetup-photo" />
+                    </a>
+                {% endif %}
+
                 <a href="{{ tenant.antenne.nextMeetup.url }}" class="hover:underline italic">
                     <h3 class="text-xl">{{ tenant.antenne.nextMeetup.title }}</h3>
                 </a>
